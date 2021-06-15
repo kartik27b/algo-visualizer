@@ -1,17 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <router-view v-slot="{ Component }">
+    <transition name="wrapper" appear>
+      <div class="bg-gray-900 w-full h-screen flex flex-col">
+        <component :is="Component" />
+      </div>
+    </transition>
+  </router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MTransition from "./components/MTransition";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: { MTransition },
+};
 </script>
 
 <style>
@@ -19,8 +21,15 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.wrapper-enter-from {
+  opacity: 0;
+}
+.wrapper-enter-to {
+  opacity: 1;
+}
+.wrapper-enter-active {
+  transition: all 1s ease;
 }
 </style>
